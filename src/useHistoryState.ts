@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 export interface History<T> {
   histories: T[];
@@ -13,7 +13,7 @@ const DEFAULT_MAX_HEAP = 20;
 
 export const useHistoryState = <T>(
   initialState?: T,
-  maxHeap?: number
+  maxHeap?: number,
 ): [T, SetState<T>, History<T>] => {
   const [state, setState] = React.useState<T>(() => initialState || null);
   const historyRef = React.useRef<T[]>([]);
@@ -27,16 +27,13 @@ export const useHistoryState = <T>(
     }
     return null;
   }, []);
-  const historyDelete = React.useCallback(
-    (value: T) => {
-      const deletedHistories = historyRef.current.filter(
-        (item) => item !== value,
-      );
-      historyRef.current = deletedHistories;
-      setState(deletedHistories[deletedHistories.length - 1]);
-    },
-    [],
-  );
+  const historyDelete = React.useCallback((value: T) => {
+    const deletedHistories = historyRef.current.filter(
+      (item) => item !== value,
+    );
+    historyRef.current = deletedHistories;
+    setState(deletedHistories[deletedHistories.length - 1]);
+  }, []);
   const setStateCallback = React.useCallback(
     (nextValue) => {
       const value =
@@ -50,12 +47,13 @@ export const useHistoryState = <T>(
 
   React.useEffect(() => {
     const historyLength = historyRef.current.length;
-    const maxHeapSize = (maxHeap ?? DEFAULT_MAX_HEAP);
-    if(historyLength > maxHeapSize) {
-      const excess = maxHeapSize - historyLength;
+    const maxHeapSize = maxHeap ?? DEFAULT_MAX_HEAP;
+
+    if (historyLength > maxHeapSize) {
+      const excess = historyLength - maxHeapSize;
       historyRef.current.splice(0, excess);
     }
-  }, [maxHeap]);
+  }, [maxHeap, state]);
 
   return React.useMemo(() => {
     return [
