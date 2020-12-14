@@ -33,8 +33,6 @@ interface History<T> {
   pop: () => void;
   deleteItem: (value: T) => void;
 }
-type SetStateCallback<T> = (state: T) => T;
-type SestState<T> = (nextState: T | SetStateCallback<T>) => void;
 type Result<T> = [T, SetState<T>, History];
 ```
 
