@@ -24,7 +24,6 @@
     "email": "ehgus6887@gmail.com"
   },
   "dependencies": {
-    "lodash": "^4.17.20",
     "react-is": "^17.0.1"
   },
   "peerDependencies": {
