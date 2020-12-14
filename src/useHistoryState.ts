@@ -1,5 +1,4 @@
 import React from 'react';
-import uniq from 'lodash/uniq';
 
 export interface History<T> {
   histories: T[];
@@ -43,7 +42,7 @@ export const useHistoryState = <T>(
       const value =
         typeof nextValue === 'function' ? nextValue(state) : nextValue;
 
-      historyRef.current = uniq([...historyRef.current, value]);
+      historyRef.current = [...new Set([...historyRef.current, value])];
       setState(value);
     },
     [state],
