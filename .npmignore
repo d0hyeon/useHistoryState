@@ -1,0 +1,11 @@
+coverage/
+__test__/
+node_modules/
+src/ 
+src
+.babelrc
+jest.config.ts
+rollup.config.js
+tsconfig.json
+yarn.lock
+README.md
