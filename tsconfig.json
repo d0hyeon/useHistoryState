@@ -19,7 +19,8 @@
     "outDir": "dist",
     "strict": false,
     "suppressExcessPropertyErrors": false,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
