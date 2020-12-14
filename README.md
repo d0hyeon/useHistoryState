@@ -21,7 +21,7 @@ npm install @odnh/use-history-state
 |maxHeap|`number`|Array size to be recorded|
 
 ---
-#### returns
+### returns
 |Name|Type|Description|
 |-----|-------|--------------|
 |Result|`Result`|default "use state" with `History`|
