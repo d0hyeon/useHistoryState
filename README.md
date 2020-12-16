@@ -38,6 +38,9 @@ type Result<T> = [T, SetState<T>, History<T>];
 
 
 ## Example
+
+[demo](https://codesandbox.io/s/usehistorystate-crsz1?file=/src/App.tsx)
+
 ```tsx
 import React from 'react';
 import {useHistoryState} from '@odnh/use-history-state';
