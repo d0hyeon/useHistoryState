@@ -3,22 +3,24 @@ import * as React from 'react';
 export interface History<T> {
   histories: T[];
   pop: () => T | null;
+  clearItems: () => void;
   deleteItem: (value: T) => void;
 }
 
+type InitialStateCallback<T> = () => T;
 type SetStateCallback<T> = (state: T) => T;
 type SetState<T> = (nextState: T | SetStateCallback<T>) => void;
 
 const DEFAULT_MAX_HEAP = 20;
 
 export const useHistoryState = <T>(
-  initialState?: T,
+  initialState?: T | InitialStateCallback<T>,
   maxHeap?: number,
 ): [T, SetState<T>, History<T>] => {
   const [state, setState] = React.useState<T>(initialState);
   const stateRef = React.useRef<T>(state);
   const historyRef = React.useRef<T[]>([]);
-
+  
   const historyPop = React.useCallback(() => {
     const historyLength = historyRef.current.length;
     if (historyLength > 0) {
@@ -34,6 +36,9 @@ export const useHistoryState = <T>(
     );
     historyRef.current = deletedHistories;
     setState(deletedHistories[deletedHistories.length - 1]);
+  }, []);
+  const historyClear = React.useCallback(() => {
+    historyRef.current = [];
   }, []);
   const setStateCallback = React.useCallback(
     (nextValue) => {
@@ -64,13 +69,14 @@ export const useHistoryState = <T>(
     }
   }, [maxHeap, state]);
   
-  return React.useMemo(() => ([
+  return [
     state,
     setStateCallback,
     {
       histories: historyRef.current,
       pop: historyPop,
       deleteItem: historyDelete,
+      clearItems: historyClear
     },
-  ]), [state]);
+  ]
 };
