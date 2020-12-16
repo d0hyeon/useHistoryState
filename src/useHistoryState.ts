@@ -14,15 +14,16 @@ const DEFAULT_MAX_HEAP = 20;
 export const useHistoryState = <T>(
   initialState?: T,
   maxHeap?: number,
-): [T, SetState<T>, History<T>] => {``
-  const [state, setState] = React.useState<T>(() => initialState);
+): [T, SetState<T>, History<T>] => {
+  const [state, setState] = React.useState<T>(initialState);
+  const stateRef = React.useRef<T>(state);
   const historyRef = React.useRef<T[]>([]);
 
   const historyPop = React.useCallback(() => {
     const historyLength = historyRef.current.length;
     if (historyLength > 0) {
       const value = historyRef.current.pop();
-      setState(historyRef.current[historyLength - 1]);
+      setState(value);
       return value;
     }
     return null;
@@ -37,13 +38,17 @@ export const useHistoryState = <T>(
   const setStateCallback = React.useCallback(
     (nextValue) => {
       const value =
-        typeof nextValue === 'function' ? nextValue(state) : nextValue;
+        typeof nextValue === 'function' ? nextValue(stateRef.current) : nextValue;
 
-      historyRef.current = [...new Set([...historyRef.current, value])];
+      historyRef.current = [...historyRef.current, stateRef.current];
       setState(value);
     },
-    [state],
+    [],
   );
+
+  React.useEffect(() => {
+    stateRef.current = state;
+  }, [state]);
 
   React.useEffect(() => {
     const historyLength = historyRef.current.length;
@@ -54,16 +59,14 @@ export const useHistoryState = <T>(
       historyRef.current.splice(0, excess);
     }
   }, [maxHeap, state]);
-
-  return React.useMemo(() => {
-    return [
-      state,
-      setStateCallback,
-      {
-        histories: historyRef.current,
-        pop: historyPop,
-        deleteItem: historyDelete,
-      },
-    ];
-  }, [state]);
+  
+  return React.useMemo(() => ([
+    state,
+    setStateCallback,
+    {
+      histories: historyRef.current,
+      pop: historyPop,
+      deleteItem: historyDelete,
+    },
+  ]), [state]);
 };
