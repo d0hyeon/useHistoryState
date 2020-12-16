@@ -40,7 +40,9 @@ export const useHistoryState = <T>(
       const value =
         typeof nextValue === 'function' ? nextValue(stateRef.current) : nextValue;
 
-      historyRef.current = [...historyRef.current, stateRef.current];
+      if(typeof stateRef.current !== 'undefined') {
+        historyRef.current = [...historyRef.current, stateRef.current];
+      }
       setState(value);
     },
     [],
