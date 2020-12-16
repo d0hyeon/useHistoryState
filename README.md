@@ -63,6 +63,15 @@ const App = () => {
         <button type="button" onClick={decrement}>- 1 </button>
       </div>
       <button type="button" onClick={revert}>revert</button>
+      
+      <p>histories</p>
+      <ul>
+        {history.histories.map(value => (
+          <li key={value}>
+            {value}
+          </li>
+        ))}
+      </ul>
     </>
   )
 }
