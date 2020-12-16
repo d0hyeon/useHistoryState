@@ -14,8 +14,8 @@ const DEFAULT_MAX_HEAP = 20;
 export const useHistoryState = <T>(
   initialState?: T,
   maxHeap?: number,
-): [T, SetState<T>, History<T>] => {
-  const [state, setState] = React.useState<T>(() => initialState || null);
+): [T, SetState<T>, History<T>] => {``
+  const [state, setState] = React.useState<T>(() => initialState);
   const historyRef = React.useRef<T[]>([]);
 
   const historyPop = React.useCallback(() => {
