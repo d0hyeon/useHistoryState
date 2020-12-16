@@ -33,7 +33,7 @@ interface History<T> {
   pop: () => void;
   deleteItem: (value: T) => void;
 }
-type Result<T> = [T, SetState<T>, History];
+type Result<T> = [T, SetState<T>, History<T>];
 ```
 
 
@@ -43,7 +43,7 @@ import React from 'react';
 import {useHistoryState} from '@odnh/use-history-state';
 
 const App = () => {
-  const [state, setState, history] = useHistoryState(0);
+  const [state, setState, history] = useHistoryState<number>(0);
   
   const increment = React.useCallback(() => {
     setState(prev => prev+1);
