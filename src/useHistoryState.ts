@@ -47,7 +47,9 @@ export const useHistoryState = <T>(
   );
 
   React.useEffect(() => {
-    stateRef.current = state;
+    if(typeof state !== 'undefined') {
+      stateRef.current = state;
+    }
   }, [state]);
 
   React.useEffect(() => {
