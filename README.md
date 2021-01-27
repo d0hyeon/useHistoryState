@@ -18,7 +18,7 @@ npm install @odnh/use-history-state
 |Name|Type|description|
 |-----|-------|--------------|
 |initialState|`any`|-|
-|maxHeap|`number`|Queue size to record|
+|maxHeap|`number`|Stack size to record|
 
 ---
 ### returns
