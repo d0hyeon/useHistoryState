@@ -50,13 +50,13 @@ const App = () => {
   
   const increment = React.useCallback(() => {
     setState(prev => prev+1);
-  }, []);
+  }, [setState]);
   const decrement = React.useCallback(() => {
     setState(prev => prev-1);
-  }, []);
+  }, [setState]);
   const revert = React.useCallback(() => {
     history.pop();
-  }, []);
+  }, [setState, history]);
 
   return (
     <>
