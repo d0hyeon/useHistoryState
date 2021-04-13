@@ -23,11 +23,8 @@
     "name": "김도현",
     "email": "ehgus6887@gmail.com"
   },
-  "dependencies": {
-    "react-is": "^17.0.1"
-  },
   "peerDependencies": {
-    "react": "^16.2.0"
+    "react": "^17.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
@@ -36,8 +33,6 @@
     "@rollup/plugin-node-resolve": "^10.0.0",
     "@rollup/plugin-typescript": "^8.2.1",
     "@types/react": "^16.9.15",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
     "rollup": "^2.33.3",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
