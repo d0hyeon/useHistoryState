@@ -11,14 +11,14 @@ npm install @odnh/use-history-state
 
 ## Use
 ```tsx
-  useHistoryState<T>(initialState?: T, maxHeap?: number) => Result;
+  useHistoryState<T>(initialState?: T, size?: number) => Result;
 ```
 
 ### parameters 
 |Name|Type|description|
 |-----|-------|--------------|
 |initialState|`any`|-|
-|maxHeap|`number`|Stack size to record|
+|size|`number`|Stack size to record|
 
 ---
 ### returns
