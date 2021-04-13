@@ -32,6 +32,7 @@ interface History<T> {
   histories: T[],
   pop: () => void;
   deleteItem: (value: T) => void;
+  clearItems: () => void;
 }
 type Result<T> = [T, SetState<T>, History<T>];
 ```
@@ -39,7 +40,7 @@ type Result<T> = [T, SetState<T>, History<T>];
 
 ## Example
 
-[demo](https://codesandbox.io/s/usehistorystate-crsz1?file=/src/App.tsx)
+[live demo](https://codesandbox.io/s/usehistorystate-crsz1?file=/src/App.tsx)
 
 ```tsx
 import React from 'react';
@@ -56,7 +57,10 @@ const App = () => {
   }, [setState]);
   const revert = React.useCallback(() => {
     history.pop();
-  }, [setState, history]);
+  }, [history]);
+  const clear = REact.useCallback(() => {
+    history.clearItems();
+  }, [history]);
 
   return (
     <>
@@ -66,7 +70,7 @@ const App = () => {
         <button type="button" onClick={decrement}>- 1 </button>
       </div>
       <button type="button" onClick={revert}>revert</button>
-      
+      <button type="button" onClick={clear}>clear</button>
       <p>histories</p>
       <ul>
         {history.histories.map(value => (
