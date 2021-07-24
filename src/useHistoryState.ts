@@ -1,22 +1,12 @@
 import * as React from 'react';
-
-export interface History<T> {
-  histories: T[];
-  pop: () => T | null;
-  clearItems: () => void;
-  deleteItem: (value: T) => void;
-}
-
-type InitialStateCallback<T> = () => T;
-type SetStateCallback<T> = (state: T) => T;
-type SetState<T> = (nextState: T | SetStateCallback<T>) => void;
+import { History, InitialStateCallback, SetState } from './type';
 
 const DEFAULT_MAX_HEAP = 20;
 
-export const useHistoryState = <T>(
+function useHistoryState <T> (
   initialState?: T | InitialStateCallback<T>,
   size?: number,
-): [T, SetState<T>, History<T>] => {
+): [T, SetState<T>, History<T>] {
   const [state, setState] = React.useState<T>(initialState);
   const [_, forceUpdate] = React.useState(0);
   const stateRef = React.useRef<T>(state);
@@ -85,3 +75,5 @@ export const useHistoryState = <T>(
     },
   ]
 };
+
+export default useHistoryState;
