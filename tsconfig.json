@@ -2,7 +2,7 @@
   "compilerOptions": {
     "module": "esnext",
     "target": "es5",
-    "sourceMap": true,
+    "sourceMap": false,
     "lib": ["ESNext", "ES2020", "dom"],
     "jsx": "react",
     "declaration": true,
