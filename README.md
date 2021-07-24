@@ -44,7 +44,7 @@ type Result<T> = [T, SetState<T>, History<T>];
 
 ```tsx
 import React from 'react';
-import {useHistoryState} from '@odnh/use-history-state';
+import useHistoryState from '@odnh/use-history-state';
 
 const App = () => {
   const [state, setState, history] = useHistoryState<number>(0);
