@@ -1,6 +1,5 @@
-import {useHistoryState, History} from './useHistoryState';
+import useHistoryState from './useHistoryState';
+import { UseHistoryState } from './type';
 
-export {
-  useHistoryState,
-  History
-}
+export { UseHistoryState };
+export default useHistoryState;
