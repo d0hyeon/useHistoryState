@@ -1,6 +1,6 @@
 {
   "name": "@odnh/use-history-state",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "react hook useHistoryState",
   "keywords": [
     "react",
